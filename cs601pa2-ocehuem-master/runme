@@ -1,0 +1,35 @@
+#!/bin/bash
+chmod +x "$0" 
+# Check if the correct number of arguments is passed
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <length> <deltaT> <deltaX>"
+    exit 1
+fi
+
+LENGTH=$1
+DELTAT=$2
+DELTAX=$3
+
+# Clean and compile the code
+echo "Compiling the code..."
+make clean
+make part2
+
+# Check if the simulation executable exists
+if [ ! -f "simulation" ]; then
+    echo "Error: Simulation executable not found!"
+    exit 1
+fi
+
+# Run the simulation
+echo "Running the simulation with Length=$LENGTH, DeltaT=$DELTAT, DeltaX=$DELTAX..."
+./simulation $LENGTH $DELTAT $DELTAX
+
+# Optionally generate documentation
+#if [ -f "Doxyfile" ]; then
+ #   echo "Generating Doxygen documentation..."
+  #  make doc
+   # echo "Documentation generated in the 'doc/html' directory."
+#else
+ #   echo "Doxyfile not found. Skipping documentation generation."
+#fi
