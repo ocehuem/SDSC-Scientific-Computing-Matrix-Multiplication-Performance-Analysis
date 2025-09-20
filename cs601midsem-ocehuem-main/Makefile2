@@ -1,0 +1,29 @@
+CXX = g++
+CXXFLAGS = -g -Wall -Wextra -std=c++11
+DOCS = 0
+
+# Source and object files
+SRC = sumdiagonal.cpp
+OBJ = $(SRC:.cpp=.o)
+
+# Target for building the executable and generating Doxygen docs
+all: sumdiagonal docs
+
+# Build the executable
+sumdiagonal: $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+# Generate the Doxyfile if it doesn't exist
+Doxyfile:
+	doxygen -g Doxyfile
+
+# Generate Doxygen documentation (HTML)
+docs: Doxyfile
+ifeq ($(DOCS),1)
+	doxygen Doxyfile
+endif
+
+# Clean target (PHONY)
+.PHONY: clean
+clean:
+	rm -f $(OBJ) sumdiagonal

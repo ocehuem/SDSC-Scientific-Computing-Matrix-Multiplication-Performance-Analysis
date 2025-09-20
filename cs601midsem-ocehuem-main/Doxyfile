@@ -1,0 +1,7 @@
+# Doxyfile for Doxygen
+
+PROJECT_NAME           = "Sum Diagonal"
+OUTPUT_DIRECTORY       = docs
+GENERATE_HTML          = YES
+GENERATE_LATEX         = YES
+INPUT                  = sumdiagonal.cpp
