@@ -1,15 +1,83 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Tf2M4PVP)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=16239686&assignment_repo_type=AssignmentRepo)
-1. (3 points) You need to use `sum11.c` for this question. `sum11.c` contains a program that allocates an array of `U` = 10 million elements, and then sums `N` = 75 million elements chosen at random. Run this program in your local environment (*not the hip server*). *hip server executions will not be accpted.*
-	1. Execute this program (without any command line arguments) and measure/report (write down) the last-layer and first-layer cache data misses. Include a screenshot that shows the numbers.
-	2. Your goal is to reduce the last-layer miss rate to 0 as reported by valgrind. To achieve this goal, first you inspect the sizes of cache hierarchy in your local environment and then modify the value of either `N` or `U` in the program. Make a copy of `sum11.c` and name the file as `sum12.c`. Make all the modifications in `sum12.c`. Report (write down) the last-layer and first-layer cache data misses. Also, write down the sizes of cache memory in each layer that exists in your local environment. Write down the command that you used to report these numbers for cache memory sizes. Include a screenshot that shows the cache miss results.
+CS601: Scientific Computing – Cache Optimization & Matrix Debugging
 
-2. `sumdiagonal.cpp` implements incorrectly a program to compute the sum of diagonal elements of a square matrix. You may assume that the inputs provided are correct and not too large. Resolve all errors that include compiler, linker, and memory errors. In addition, resolve all other kinds of errors (e.g. correctness) you come accross. You may need to use GDB to debug some of the errros. Make sure that you use Valgrind to detect and fix all memory errors. When you are done resolving all the errors and have a functioanlly correct working program, insert comments to the program so that Doxygen generates a documentation corresponding to the source code. You must use the `@brief`, `@bug`, `@author`, `@file`, `@fn`, and `@param` directives in your comments. `@bug` must list all the bugs that you have fixed to make the implementation error free.
+Optimized array summation program (sum11.c → sum12.c) to achieve zero last-layer cache misses by inspecting cache hierarchy and modifying array sizes.
 
-**deliverables**: 
-- `Makefile1` containing targets q11 and q12. each target should compile `sum11.c` or `sum12.c` as appropriate and execute under valgrind reporting the details as explained in 1.1 and 1.2 above. 
-- `1.pdf` containing the writeup and screenshots as mentioned above. 
-- `sum12.c`.
-- `Makefile2` and all the source code (modified sumdiagonal.cpp and the documentation related files) that you have for Question 2. You need to include a target called `sumdiagonal` in `Makefile2` that builds and executes your code containing modified implementation. Upon executing the command `make -f Makefile2 DOCS=1" you should produce doxygen assisted documentation as described in Question 2.
+Debugged and corrected matrix diagonal summation program (sumdiagonal.cpp) using GDB and Valgrind, ensuring memory safety and correctness.
 
-When you are done answering the questions you must tag the repository as `cs601midsemsubmission`
+Added Doxygen documentation with @brief, @bug, @author, @file, @fn, @param directives for maintainable, error-free code.
+
+Tools & Frameworks: C, C++, Valgrind, GDB, Doxygen, Makefile, Git/GitHub.
+
+Concepts: Cache hierarchy analysis, memory optimization, debugging, numerical correctness, automated documentation generation.
+
+# CS601 Mid-Semester Assignment: Cache Optimization & Matrix Debugging
+
+## 📌 Overview
+This assignment focuses on **cache-aware programming, memory optimization, and debugging**. It consists of two questions:
+
+1. **Cache Optimization:** Modify `sum11.c` to reduce last-layer cache misses to zero.  
+2. **Matrix Debugging:** Correct and document the `sumdiagonal.cpp` program to compute the sum of diagonal elements correctly.
+
+## 📌 Project Components
+
+### Question 1 – Array Summation (`sum11.c` / `sum12.c`)
+- Original program `sum11.c` allocates an array of **U = 10 million** elements and sums **N = 75 million** random elements.  
+- Measured **first-layer (L1) and last-layer (LL) cache misses** using **Valgrind Cachegrind**.  
+- Modified program `sum12.c` to optimize for **zero last-layer cache misses** by adjusting `U` and `N` after inspecting local cache hierarchy:
+```bash
+lscpu | grep "L1d\|L2\|L3"    # Command to inspect cache sizes
+valgrind --tool=cachegrind ./sum12
+```
+- Screenshots of cache misses and hierarchy are included in 1.pdf.
+
+### Question 2 – Matrix Diagonal Summation (sumdiagonal.cpp)
+
+- Corrected all compiler, linker, runtime, and logic errors in sumdiagonal.cpp.
+- Used GDB for debugging and Valgrind to detect and fix memory errors.
+- Added Doxygen comments including @brief, @bug, @author, @file, @fn, and @param directives.
+- Build and execute using Makefile2 target sumdiagonal.
+- Generate documentation with:
+	make -f Makefile2 DOCS=1
+
+## 📌 Deliverables
+
+Makefile1: Targets q11 (build/run sum11.c) and q12 (build/run sum12.c with Valgrind).
+
+sum12.c – Optimized array summation program.
+
+1.pdf – Writeup with screenshots of cache miss results and cache sizes.
+
+Makefile2 – Builds sumdiagonal and optionally generates documentation.
+
+Modified source files for Question 2 (sumdiagonal.cpp and Doxygen files).
+
+📌 Tools & Frameworks
+
+Programming: C, C++
+
+Build & Automation: Make, Makefile
+
+Profiling & Debugging: Valgrind Cachegrind, GDB
+
+Documentation: Doxygen
+
+Version Control: Git, GitHub
+
+📌 Concepts
+
+Cache hierarchy analysis and optimization
+
+Memory-safe programming and debugging
+
+Randomized array access and performance measurement
+
+Numerical computation and object-oriented C++ programming
+
+Automated documentation generation using Doxygen
+
+📌 Submission
+
+Tag the repository for grading:
+
+git tag -a cs601midsemsubmission -m "CS601 Mid-Semester Submission"
+git push --tags
